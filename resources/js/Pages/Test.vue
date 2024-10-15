@@ -9,5 +9,15 @@
 </script>
 
 <style scoped>
+    h1 {
+        color: red;
+        background-color: yellow;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 16px;
+    }
+
 
 </style>
