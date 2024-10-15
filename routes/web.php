@@ -1,22 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::domain("restaurant." . env('APP_URL'))->group(function () {
     Route::get('/', function () {
-        return dd("hello restaurant");
+        return Inertia::render('Test');
     });
 });
 
 Route::domain("kassa." . env('APP_URL'))->group(function () {
     Route::get('/', function () {
-        return dd("hello kassa");
+        return Inertia::render('Test');
     });
 });
 
 Route::domain("admin." . env('APP_URL'))->group(function () {
     Route::get('/', function () {
-        return dd("hello admin");
+        return Inertia::render('Test');
     });
 });
 
