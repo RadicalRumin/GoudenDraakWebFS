@@ -1,3 +1,28 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
+@font-face {
+    font-family: 'chinese_takeawayregular';
+    src: url('/public/fonts/chinesetakeaway-webfont.woff2') format('woff2'),
+         url('/public/fonts/chinesetakeaway-webfont.woff') format('woff'),
+         url('/public/fonts/chinese.msyh.ttf') format('truetype'),
+        url('/public/fonts/CHINESETAKEAWAY.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+body {
+    background-color: darkred;
+    margin: 15px;
+    margin-left: 50px;
+    margin-right: 50px
+}
+
+td {
+    padding: 0px;
+}
+
+a {
+    text-decoration: none;
+	color: yellow;
+}
