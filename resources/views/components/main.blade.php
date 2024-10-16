@@ -1,3 +1,19 @@
+<main>
+
+
+
+
+
+
+
+
+</main>
+
+
+
+
+
+
 <table id="main_table" style="padding:5px;width:100%;border-collapse: collapse">
 			<tr style="height:7px;background-color:red">
 				<td colspan="9">
@@ -88,4 +104,4 @@
 				<td colspan="9">
 				</td>
 			<tr>
-		</table>
+</table>
