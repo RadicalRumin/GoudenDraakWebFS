@@ -1,107 +1,46 @@
-<main>
+<main class="grid grid-rows-[auto,1fr,auto]">
+    {{-- Top --}}
+    <div class="bg-pink-500 grid grid-cols-[10px,30px,1fr,30px,10px]">
+		<div></div>
+        <button>test</button>
+
+		<div class="grid grid-rows-[10px,30px,30px,20px]">
+			<div></div>
+			<div class="border-yellow-400 border-y-4"></div>
+			<div></div>
+			<div></div>
+		</div>
+
+		<button>test</button>
+		<div></div>
+    </div>
 
 
+    {{-- Center --}}
+    <div class="bg-green-500 grid grid-cols-[10px,30px,1fr,30px,10px]">
+		<div></div>
+		<div class="border-yellow-400 border-x-4"></div>
+        <div class="">
+			<div>{{$slot}}</div>
+		</div>
+		<div class="border-yellow-400 border-x-4"></div>
+		<div></div>
+    </div>
 
+    {{-- Bottom --}}
+    <div class="bg-purple-700 h-[90px] grid grid-cols-[10px,30px,1fr,30px,10px]">
+		<div></div>
+        <button>test</button>
+        
+		<div class="grid grid-rows-[20px,30px,30px,10px]">
+			<div></div>
+			<div></div>
+			<div class="border-yellow-400 border-y-4"></div>
+			<div></div>
+		</div>
 
-
-
-
+        <button>test</button>
+		<div></div>
+	</div>
 
 </main>
-
-
-
-
-
-
-<table id="main_table" style="padding:5px;width:100%;border-collapse: collapse">
-			<tr style="height:7px;background-color:red">
-				<td colspan="9">
-				</td>
-			<tr>
-			<tr style="height:25px;background-color:red">
-				<td width="7px">
-				</td>
-				<td style="width:25px;border-left:4px solid yellow;border-top:4px solid yellow"></td>
-				<td style="width:25px;border-right:4px solid yellow;border-top:4px solid yellow"></td>
-				<td style="width:25px;border-right:4px solid yellow;border-bottom:4px solid yellow"></td>
-				<td style="border-top:4px solid yellow;border-bottom:4px solid yellow"></td>
-				<td style="width:25px;border-left:4px solid yellow;border-bottom:4px solid yellow"></td>
-				<td style="width:25px;border-left:4px solid yellow;border-top:4px solid yellow"></td>
-				<td style="width:25px;border-right:4px solid yellow;border-top:4px solid yellow"></td>
-				<td width="7px">
-			</tr>
-			<tr style="height:25px;background-color:red">
-				<td width="7px">
-				<td style="width:25px;border-left:4px solid yellow;border-bottom:4px solid yellow"></td>
-				<td style="width:25px;border:4px solid yellow"></td>
-				<td style="width:25px;border:4px solid yellow"></td>
-				<td></td>
-				<td style="width:25px;border:4px solid yellow"></td>
-				<td style="width:25px;border:4px solid yellow"></td>
-				<td style="width:25px;border-right:4px solid yellow;border-bottom:4px solid yellow"></td>
-				<td width="7px">
-			</tr>
-			<tr style="height:25px;background-color:red">
-				<td width="7px">
-				<td style="width:25px;border-right:4px solid yellow;border-bottom:4px solid yellow"></td>
-				<td style="width:25px;border:4px solid yellow"></td>
-				<td style="width:25px"></td>
-				<td></td>
-				<td style="width:25px"></td>
-				<td style="width:25px;border:4px solid yellow"></td>
-				<td style="width:25px;border-bottom:4px solid yellow"></td>
-				<td width="7px">
-			</tr>
-			<tr style="height:50px;background-color:red">
-				<td width="7px">
-				<td style="width:25px;border-right:4px solid yellow;border-left:4px solid yellow"></td>
-				<td style="width:25px;"></td>
-				<td style="width:25px;"></td>
-				<td style="text-align:center">
-                    {{ $slot }}
-				</td>
-				<td style="width:25px;"></td>
-				<td style="width:25px;"></td>
-				<td style="width:25px;border-right:4px solid yellow;border-left:4px solid yellow"></td>
-				<td width="7px">
-			</tr>
-			<tr style="height:25px;background-color:red">
-				<td width="7px">
-				<td style="width:25px;border-right:4px solid yellow;border-top:4px solid yellow"></td>
-				<td style="width:25px;border:4px solid yellow"></td>
-				<td style="width:25px"></td>
-				<td></td>
-				<td style="width:25px"></td>
-				<td style="width:25px;border:4px solid yellow"></td>
-				<td style="width:25px;border-top:4px solid yellow"></td>
-				<td width="7px">
-			</tr>
-			<tr style="height:25px;background-color:red">
-				<td width="7px">
-				<td style="width:25px;border-left:4px solid yellow;border-top:4px solid yellow"></td>
-				<td style="width:25px;border:4px solid yellow"></td>
-				<td style="width:25px;border:4px solid yellow"></td>
-				<td></td>
-				<td style="width:25px;border:4px solid yellow"></td>
-				<td style="width:25px;border:4px solid yellow"></td>
-				<td style="width:25px;border-right:4px solid yellow;border-top:4px solid yellow"></td>
-				<td width="7px">
-			</tr>
-			<tr style="height:25px;background-color:red">
-				<td width="7px">
-				</td>
-				<td style="width:25px;border-left:4px solid yellow;border-bottom:4px solid yellow"></td>
-				<td style="width:25px;border-right:4px solid yellow;border-bottom:4px solid yellow"></td>
-				<td style="width:25px;border-right:4px solid yellow"></td>
-				<td style="border-top:4px solid yellow;border-bottom:4px solid yellow"></td>
-				<td style="width:25px;border-left:4px solid yellow;"></td>
-				<td style="width:25px;border-left:4px solid yellow;border-bottom:4px solid yellow"></td>
-				<td style="width:25px;border-right:4px solid yellow;border-bottom:4px solid yellow"></td>
-				<td width="7px">
-			</tr>
-			<tr style="height:7px;background-color:red">
-				<td colspan="9">
-				</td>
-			<tr>
-</table>
