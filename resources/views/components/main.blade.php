@@ -1,6 +1,6 @@
-<main class="grid grid-rows-[auto,1fr,auto]">
+<div class="bg-[#ff0000] grid grid-rows-[auto,1fr,auto]">
 	{{-- Top --}}
-	<div class="bg-pink-500 grid grid-cols-[10px,90px,1fr,90px,10px]">
+	<div class=" grid grid-cols-[10px,90px,1fr,90px,10px]">
 		<div></div>
 
 		{{-- Top Left Corner --}}
@@ -53,19 +53,18 @@
 
 
 	{{-- Center --}}
-	<div class="bg-green-500 grid grid-cols-[10px,30px,1fr,30px,10px]">
+	<div class=" grid grid-cols-[10px,30px,1fr,30px,10px]">
 		<div></div>
 		<div class="border-yellow-400 border-x-4"></div>
 		<div class="">
-			<div>{{$slot}}</div>
+			<main>{{$slot}}</main>
 		</div>
 		<div class="border-yellow-400 border-x-4"></div>
 		<div></div>
 	</div>
 
 	{{-- Bottom --}}
-	{{-- 10px,90px,1fr,90px,10px --}}
-	<div class="bg-purple-700 grid grid-cols-[10px,90px,1fr,90px,10px]">
+	<div class=" grid grid-cols-[10px,90px,1fr,90px,10px]">
 		<div></div>
 
 		{{-- Top Left Corner --}}
@@ -117,4 +116,4 @@
 	</div>
 
 
-</main>
+</div>
