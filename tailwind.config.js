@@ -6,7 +6,12 @@ export default {
     "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        chineseTakeaway: ['"chinese_takeawayregular"', "sans-serif"],
+        // Add more custom font families as needed
+      },
+    },
   },
   plugins: [],
 }

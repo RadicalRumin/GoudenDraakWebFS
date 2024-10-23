@@ -1,23 +1,24 @@
-<table id="main_table" style="padding:5px;width:100%;border-collapse: collapse">
-    <tr style="height:50px;background-color:red">
-        <td style="text-align:center;width:30%;color:yellow;font-size:30px">
-                <img style="vertical-align: middle; height: 50px;" src="{{url('/images/dragon-small.png')}}" alt="Golden Dragon" >
-                <span style="font-family:'chinese_takeawayregular'">De Gouden Draak</span>
-                <img style="vertical-align: middle; height: 50px;" src="{{url('/images/dragon-small-flipped.png')}}" alt="Golden Dragon" height="50px">
-        </td>
+<header class="flex flex-col lg:flex-row justify-center items-center bg-[#ff0000] font-chineseTakeaway text-2xl">
+    <!-- First section (always visible, stacking on small screens) -->
+    <div class="text-[#ffff00] p-2 w-full lg:w-1/3 flex justify-center items-center">
+        <img class="h-14 align-middle" src="{{url('/images/dragon-small.png')}}" alt="Golden Dragon">
+        <span class="mx-2">De Gouden Draak</span>
+        <img class="h-14 align-middle" src="{{url('/images/dragon-small-flipped.png')}}" alt="Golden Dragon">
+    </div>
 
-        <td>
-            <a href="paginas/aanbiedingen.html" style="color:yellow;font-weight:bold;text-decoration: none;">
-                <marquee behavior="scroll" direction="left">
-                    Welkom bij De Gouden Draak. Klik op deze tekst om de aanbiedingen van deze week te zien!
-                </marquee>
-            </a>
-        </td>
-        <td style="text-align:center;width:30%;color:yellow;font-size:30px">
+    <!-- Second section (always visible, stacks under first on small screens) -->
+    <div class="text-[#ffff00] p-8 w-full lg:w-1/3 flex justify-center items-center overflow-hidden">
+        <a href="paginas/aanbiedingen.html" class="font-sans font-bold no-underline">
+            <x-marquee>
+                Welkom bij De Gouden Draak. Klik op deze tekst om de aanbiedingen van deze week te zien!
+            </x-marquee>
+        </a>
+    </div>
 
-                <img style="vertical-align: middle; height: 50px;" src="{{url('/images/dragon-small.png')}}" alt="Golden Dragon" height="50px">
-                <span style="font-family:'chinese_takeawayregular'">De Gouden Draak</span>
-                <img style="vertical-align: middle; height: 50px;" src="{{url('/images/dragon-small-flipped.png')}}" alt="Golden Dragon" height="50px">
-        </td>
-    </tr>
-</table>
+    <!-- Optional third section (only visible on large screens, aligns side by side) -->
+    <div class="text-[#ffff00] p-10 w-full lg:w-1/3 lg:flex hidden lg:justify-center lg:items-center">
+        <img class="h-14 align-middle" src="{{url('/images/dragon-small.png')}}" alt="Golden Dragon">
+        <span class="mx-2">De Gouden Draak</span>
+        <img class="h-14 align-middle" src="{{url('/images/dragon-small-flipped.png')}}" alt="Golden Dragon">
+    </div>
+</header>

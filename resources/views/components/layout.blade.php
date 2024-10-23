@@ -1,4 +1,4 @@
-<div class="bg-[#ff0000] grid grid-rows-[auto,1fr,auto]">
+<div class="bg-[#ff0000] grid grid-rows-[auto,1fr,auto] h-screen">
 	{{-- Top --}}
 	<div class=" grid grid-cols-[10px,90px,1fr,90px,10px]">
 		<div></div>

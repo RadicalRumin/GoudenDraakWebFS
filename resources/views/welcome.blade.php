@@ -12,7 +12,8 @@
     </head>
     <body>
 		<x-header></x-header>
-		<x-main>
+		<x-layout>
+{{--
 				<!-- CONTENT HERE! -->
 				<table width=100%>
 
@@ -75,7 +76,7 @@
 					</tr>
 				</table>
 				<br>
-				<div text-align="center"><a href="paginas/contact_new.html">Naar Contact</a></div>
-		</x-main>
+				<div text-align="center"><a href="paginas/contact_new.html">Naar Contact</a></div> --}}
+		</x-layout>
     </body>
 </html>
