@@ -13,21 +13,12 @@
     <body>
 		<x-header></x-header>
 		<x-layout>
-{{--
-				<!-- CONTENT HERE! -->
-				<table width=100%>
+			<div>
+				<x-navigation></x-navigation>
 
-					<x-navigation></x-navigation>
+				<div>
 
-					<tr style="padding-top:50px">
-						<td colspan="3" height="50px">
-						</td>
-					</tr>
-					<tr style="padding-top:50px">
-						<td width="50px">
-						</td>
-						<td align="center" style='font-size:5;border:1px solid black;background:floralwhite'> <br>
-							<h3>Al jaren is De Gouden Draak een begrip als het gaat om de beste afhaalgerechten in 's-Hertogenbosch.<br>
+					<h3>Al jaren is De Gouden Draak een begrip als het gaat om de beste afhaalgerechten in 's-Hertogenbosch.<br>
 							Graag trakteren we u op authentieke gerechten uit de Cantonese keuken.</h3>
 							<br>
 							<h2><u>Speciale Studentenaanbieding</h2></u>
@@ -70,13 +61,34 @@
 								Met witte rijst. (Nasi of bami voor meerprijs mogelijk.)
 							</h3>
 							<h1>Prijs: €21,00</h1>
+				</div>
+
+
+				<div class="flex justify-center">
+					<a href="paginas/contact_new.html">Naar Contact</a>
+				</div>
+			</div>
+
+			{{-- <!-- CONTENT HERE! -->
+				<table>
+					<x-navigation></x-navigation>
+
+					<tr style="padding-top:50px">
+						<td colspan="3" height="50px">
+						</td>
+					</tr>
+					<tr style="padding-top:50px">
+						<td width="50px">
+						</td>
+						<td align="center" style='font-size:5;border:1px solid black;background:floralwhite'> <br>
+
 						</td>
 						<td width="50px">
 						</td>
 					</tr>
 				</table>
-				<br>
-				<div text-align="center"><a href="paginas/contact_new.html">Naar Contact</a></div> --}}
+				<br> --}}
+
 		</x-layout>
     </body>
 </html>

@@ -1,4 +1,4 @@
-<div class="bg-[#ff0000] grid grid-rows-[auto,1fr,auto] h-screen">
+<div class="bg-[#ff0000] grid grid-rows-[auto,1fr,auto] min-h-[80vh] max-w-full">
 	{{-- Top --}}
 	<div class=" grid grid-cols-[10px,90px,1fr,90px,10px]">
 		<div></div>
@@ -53,12 +53,12 @@
 
 
 	{{-- Center --}}
-	<div class=" grid grid-cols-[10px,30px,1fr,30px,10px]">
+	<div class="grid grid-cols-[10px,30px,1fr,30px,10px]">
 		<div></div>
 		<div class="border-yellow-400 border-x-4"></div>
-		<div class="">
-			<main>{{$slot}}</main>
-		</div>
+		<main class="max-size-full">
+			{{ $slot }}
+		</main>
 		<div class="border-yellow-400 border-x-4"></div>
 		<div></div>
 	</div>
