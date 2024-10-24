@@ -7,7 +7,7 @@ defineProps({
 
 <template>
     <div>
-        <div class="flex justify-between">
+        <div class="flex justify-around">
             <img class="size-24 transform" :src="dragonImage" alt="Golden Dragon" />
             <div class="flex justify-center flex-col">
                 <span class="text-center sm:text-sm md:text-4xl font-bold text-[#ffff00]">Chinees Indische
@@ -17,7 +17,7 @@ defineProps({
                     De Gouden Draak
                 </span>
             </div>
-            <img class="size-24 transform scaleX(-1)" :src="dragonImage" alt="Golden Dragon" />
+            <img class="size-24 scale-x-[-1]" :src="dragonImage" alt="Golden Dragon" />
         </div>
 
         <nav>
