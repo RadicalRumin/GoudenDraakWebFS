@@ -21,20 +21,20 @@ defineProps({
         </div>
 
         <nav>
-            <ul class="flex flex-col justify-center m-auto font-medium text-white">
-                <li class="text-center">
+            <ul class="flex flex-col md:flex-row justify-center m-auto max-w-[50vw] font-medium text-white">
+                <li class="text-center bg-gradient-to-b from-cyan-300 to-blue-700">
                     <a href="paginas/MENUKAART.html">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menukaart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </a>
                 </li>
 
-                <li class="text-center">
+                <li class="text-center bg-gradient-to-b from-cyan-300 to-blue-700">
                     <a href="paginas/news.html">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nieuws&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </a>
                 </li>
 
-                <li class="text-center">
+                <li class="text-center bg-gradient-to-b from-cyan-300 to-blue-700">
                     <a href="paginas/contact.html">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </a>
