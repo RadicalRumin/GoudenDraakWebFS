@@ -1,4 +1,9 @@
 <script setup>
+import Navigation from './Navigation.vue';
+
+defineProps({
+	dragonImage: Object,
+})
 </script>
 
 <template>
@@ -62,6 +67,7 @@
 		<div class="border-yellow-400 border-x-4"></div>
 		<div class="">
 			<main>
+				<Navigation :dragon-image="dragonImage"/>
                 <slot/>
             </main>
 		</div>
@@ -73,7 +79,7 @@
 	<div class=" grid grid-cols-[10px,90px,1fr,90px,10px]">
 		<div></div>
 
-		 <!-- Top Left Corner  -->
+		 <!-- Bottom Left Corner  -->
 		<div class="grid grid-rows-[auto,10px]">
 			<div class="grid grid-cols-[30px,30px,30px] grid-rows-[30px,30px,30px]">
 				<div class="border-yellow-400 border-t-4"></div>
@@ -91,7 +97,7 @@
 			<div></div>
 		</div>
 
-		 <!-- Top Center  -->
+		 <!-- Bottom Center  -->
 		<div class="grid grid-rows-[30px,30px,30px,10px]">
 			<div></div>
 			<div></div>
@@ -99,7 +105,7 @@
 			<div></div>
 		</div>
 
-		<!-- Top right Corner  -->
+		<!-- Bottom right Corner  -->
 		<div class="grid grid-rows-[auto,10px]">
 			<div class="grid grid-cols-[30px,30px,30px] grid-rows-[30px,30px,30px]">
 
