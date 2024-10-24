@@ -6,16 +6,20 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@primevue/auto-import-resolver": "^4.1.1",
         "autoprefixer": "^10.4.20",
         "axios": "^1.7.4",
         "laravel-vite-plugin": "^1.0",
         "postcss": "^8.4.47",
         "tailwindcss": "^3.4.14",
+        "unplugin-vue-components": "^0.27.4",
         "vite": "^5.0"
     },
     "dependencies": {
         "@inertiajs/vue3": "^1.2.0",
+        "@primevue/themes": "^4.1.1",
         "@vitejs/plugin-vue": "^5.1.4",
+        "primevue": "^4.1.1",
         "typescript": "^5.6.3"
     }
 }
