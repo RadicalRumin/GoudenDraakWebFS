@@ -1,5 +1,5 @@
 <script setup>
-import RestaurantLayout from '@/Layouts/RestaurantLayout.vue';
+import RestaurantLayout from '@/Layouts/Restaurant.vue';
 
 defineOptions({
     layout: RestaurantLayout
