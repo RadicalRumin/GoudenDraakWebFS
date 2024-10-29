@@ -13,5 +13,17 @@
             <li>{{ $item->name }} - {{ $item->price }}</li>
         @endforeach
     </ul>
+    <div style="page-break-before: always;">
+        <h1>Aanbiedingen</h1>
+        @isset($specials)
+            <ul>
+                @foreach($specials as $special)
+                    <li>{{ $special }}</li>
+                @endforeach
+            </ul>
+        @else
+            <h2>Er zijn geen aanbiedingen op dit moment!</h2>
+        @endisset
+    </div>
 </body>
 </html>
