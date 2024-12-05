@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dish;
-use Barryvdh\DomPDF\Facade\Pdf as Pdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class MenuController extends Controller
 {
