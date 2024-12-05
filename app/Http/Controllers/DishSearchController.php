@@ -13,7 +13,7 @@ class DishSearchController extends Controller
         $dishes = Dish::query()
             ->where('name', 'like', "%{$query}%")
             ->orWhere('description', 'like', "%{$query}%")
-            ->get(['id', 'category_id', 'description', 'name']);
+            ->get(['id', 'category_id', 'description', 'name', 'price']);
 
         return inertia('Kassa/Kassa', [
             'dishes' => $dishes,
