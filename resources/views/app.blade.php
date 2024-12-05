@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     @vite('resources/js/app.js')
     @vite('resources/css/app.css')
-    @vite('resources/css/app.interia.css')
     @vite('resources/css/app.tailwind.css')
     @inertiaHead
   </head>

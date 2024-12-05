@@ -2,7 +2,7 @@
 import Navigation from './Navigation.vue';
 
 defineProps({
-	dragonImage: Object,
+	dragonImage: String,
 })
 </script>
 

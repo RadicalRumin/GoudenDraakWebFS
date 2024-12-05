@@ -1,9 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import Layout from "@/Layouts/Website/Layout.vue";
 import Header from "@/Layouts/Website/Header.vue";
 
 defineProps({
-    dragonImage: Object,
+    dragonImage: String,
 });
 </script>
 

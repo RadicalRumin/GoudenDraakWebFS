@@ -1,8 +1,8 @@
-<script setup>
+<script setup lang="ts">
 import Marquee from '@/Components/Marquee.vue';
 
 defineProps({
-    dragonImage: Object,
+    dragonImage: String,
 })
 </script>
 
