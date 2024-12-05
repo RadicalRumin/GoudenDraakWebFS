@@ -9,7 +9,7 @@ class DishSearchController extends Controller
 {
     public function index(Request $request)
     {
-        $query = $request->input('query');
+        $query = $request->input('query', '');
         $dishes = Dish::query()
             ->where('name', 'like', "%{$query}%")
             ->orWhere('description', 'like', "%{$query}%")

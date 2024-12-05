@@ -1,7 +1,8 @@
 <template>
     <div>
         <h1 class="text-2xl font-bold mb-4">Dishes</h1>
-        <input type="text" v-model="search" placeholder="Search dishes..." class="mb-4 p-2 border rounded" />
+        <input type="text" v-model="search" @input="fetchResults" placeholder="Search dishes..."
+            class="mb-4 p-2 border rounded" />
 
         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
@@ -23,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-    import { computed, onMounted, ref, watch} from 'vue';
+    import { ref} from 'vue';
     import { Dish} from '@/Models/dish';
     import { router } from '@inertiajs/vue3';
 
@@ -32,42 +33,15 @@
     const results = ref<Dish[]>(props.dishes);
     const loading = ref(false);
 
-    // function fetchResults() {
-    //     loading.value = true;
-    //     router.get(route())
-    // };
-
-
-
-    // const fetchDishes = async (searchItem: string = '') => {
-    //     try {
-    //         const response = await fetch(`/getdishes/?search=${encodeURIComponent(searchItem)}`);
-    //         if (!response.ok) {
-    //             throw new Error('Network response was not ok');
-    //         }
-    //         const data = await response.json();
-    //         console.log(`before update dishes: ${JSON.stringify(dishes.value)}`);
-    //         dishes.value = [...data.map((dish: DishItem) => ({
-    //             ...dish,
-    //             name: dish.name.toLowerCase(),
-    //         }))];
-    //         console.log(`after update dishes: ${JSON.stringify(dishes.value)}`);
-    //     } catch (error) {
-    //         console.error('Error fetching dishes:', error);
-    //     }
-    // };
-
-    // const debouncedFetchDishes = debounce(fetchDishes, 500);
-
-    // watch(search, (searchItem) => {
-    //     debouncedFetchDishes(searchItem);
-    // });
-
-    // onMounted(() => {
-    //     fetchDishes();
-    // });
-
-    // const filteredDishes = computed(() => {
-    //     return dishes.value;
-    // });
+    function fetchResults() {
+        loading.value = true;
+        router.get('/', { query: search.value }, {
+            preserveState: true,
+            only: ['dishes'],
+            onSuccess: (page) => {
+                results.value = page.props.dishes as Dish[];
+                loading.value = false;
+            },
+        });
+    };
 </script>
