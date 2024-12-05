@@ -22,6 +22,13 @@ Route::domain("admin." . env('APP_URL'))->group(function () {
     });
 });
 
+Route::domain("review." . env('APP_URL'))->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('Review/ReviewForm');
+    });
+});
+
+
 Route::get('/', function () {
     $dragonImage = asset('/images/dragon-small.avif');
 
