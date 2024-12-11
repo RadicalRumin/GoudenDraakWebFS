@@ -35,10 +35,6 @@
     const results = ref<Dish[]>(props.dishes);
     const loading = ref(false);
 
-
-    console.log(results.value);
-
-
     function fetchResults() {
         loading.value = true;
         router.get('/', { query: search.value }, {
