@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\BillController;
 use Inertia\Inertia;
 
 Route::domain("restaurant." . env('APP_URL'))->group(function () {
@@ -40,3 +41,4 @@ Route::get('/', function () {
 });
 
 Route::get('/menu/pdf', [MenuController::class, 'generatePdf']);
+Route::get('/bill/pdf', [BillController::class, 'generateBill']);
