@@ -11,9 +11,24 @@ class DishSearchController extends Controller
     {
         $query = $request->input('query', '');
         $dishes = Dish::query()
-            ->where('name', 'like', "%{$query}%")
-            ->orWhere('description', 'like', "%{$query}%")
-            ->get(['id', 'category_id', 'description', 'name', 'price']);
+            ->select('dishes.id', 'categories.name as category_name', 'dishes.description', 'dishes.name', 'dishes.price')
+            ->join('categories', 'dishes.category_id', '=', 'categories.id')
+            ->where('dishes.name', 'like', "%{$query}%")
+            ->orWhere('dishes.description', 'like', "%{$query}%")
+            ->orWhere('dishes.id', 'like', "%{$query}%")
+            ->orWhere('categories.name', 'like', "%{$query}%")
+            ->get();
+
+        // Format the dishes
+        $dishes = $dishes->map(function ($dish) {
+            return [
+                'id' => $dish->id,
+                'categoryName' => $dish->category_name,
+                'dishName' => $dish->name,
+                'description' => $dish->description,
+                'price' => $dish->price,
+            ];
+        });
 
         return inertia('Kassa/Kassa', [
             'dishes' => $dishes,

@@ -8,14 +8,16 @@
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                 <tr>
                     <th scope="col" class="px-6 py-3">Nummer</th>
-                    <th scope="col" class="px-6 py-3">Naam</th>
+                    <th scope="col" class="px-6 py-3">Categorie</th>
+                    <th scope="col" class="px-6 py-3">Gerecht</th>
                     <th scope="col" class="px-6 py-3">Prijs</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="dish in results" class="bg-white border-b hover:bg-gray-50">
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ dish.id }}</td>
-                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ dish.name }}</td>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ dish.categoryName }}</td>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ dish.dishName }}</td>
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ dish.price }}</td>
                 </tr>
             </tbody>
@@ -32,6 +34,10 @@
     const props = defineProps<{dishes: Dish[]}>()
     const results = ref<Dish[]>(props.dishes);
     const loading = ref(false);
+
+
+    console.log(results.value);
+
 
     function fetchResults() {
         loading.value = true;
