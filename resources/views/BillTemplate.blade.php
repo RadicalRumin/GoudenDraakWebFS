@@ -24,8 +24,9 @@
         <h1>Review Formulier</h1>
         <p>Scan de onderstaande QR Code om een review achter te laten!</p>
         <div class="qr-code">
-            <img src="{{ $qrCodePath }}" alt="QR Code">
+            <img src="{{ $qrCodeUrl }}" alt="QR Code">
         </div>
+        
     </div>
 </body>
 </html>
