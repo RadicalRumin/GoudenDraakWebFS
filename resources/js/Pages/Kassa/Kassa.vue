@@ -28,7 +28,7 @@
     import { Dish} from '@/Models/dish';
     import { router } from '@inertiajs/vue3';
 
-    const search = ref("");
+    const search = ref(getQueryParam('query') || "");
     const props = defineProps<{dishes: Dish[]}>()
     const results = ref<Dish[]>(props.dishes);
     const loading = ref(false);
@@ -44,4 +44,10 @@
             },
         });
     };
+
+    function getQueryParam(param: string) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
 </script>
