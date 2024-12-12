@@ -7,7 +7,7 @@ use Inertia\Inertia;
 
 Route::domain("restaurant." . env('APP_URL'))->group(function () {
     Route::get('/', function () {
-        return Inertia::render('RestaurantTest');
+        return Inertia::render('Restaurant/Restaurant');
     });
 });
 
