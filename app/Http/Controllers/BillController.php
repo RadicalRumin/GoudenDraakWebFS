@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Table;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -22,11 +24,17 @@ class BillController extends Controller
         // Get the full URL for the saved PNG file
         $qrCodeUrl = storage_path('app/public/' . $qrCodePath);
 
-        // Fetch your orders (dummy data here for now)
-        $orders = []; // You would normally fetch orders from your database
+        //get orders from table
+        $orders = Table::find(1)->Orders;
+        $orderTotal = 0;
+        foreach($orders as $orderItem) {
+            $orderTotal += $orderItem->price;
+        }
+
 
         // Create PDF from the view and pass the URL of the QR code image
         $bill = Pdf::loadView('BillTemplate', [
+            'orderItems' => $orders,
             'qrCodeUrl' => $qrCodeUrl,
         ]);
 
