@@ -3,7 +3,14 @@ import './bootstrap';
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import PrimeVue from 'primevue/config';
-import Aura from '@primevue/themes/aura';
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+import { faCoffee, faUser, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+
+library.add(faCoffee, faUser, faGithub, faPlus, faXmark);
 
 createInertiaApp({
     resolve: name => {
@@ -14,10 +21,9 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(PrimeVue, {
-                theme: {
-                    preset: Aura
-                }
+                unstyled: true,
             })
+            .component('font-awesome-icon', FontAwesomeIcon)
             .mount(el)
     },
 })

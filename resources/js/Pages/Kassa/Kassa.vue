@@ -22,25 +22,27 @@
                         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ dish.dishName }}</td>
                         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">€{{ dish.price }}</td>
                         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            <button @click="addDish(dish)"
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                Toevoegen
-                            </button>
+                            <font-awesome-icon class="cursor-pointer w-4 h-4 text-green-600"
+                            :icon="['fas', 'plus']" @click="addDish(dish)"/>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div>
                 <h1 class="text-2xl font-bold mb-4">Bestelling</h1>
-                <ul class="list-disc">
-                    <li v-for="dish in selectedDishes" class="mb-2"><div>
-                        <span class="font-bold">{{ dish.dishName }}</span> - €{{ dish.price }}
-                        <span class="pi pi-trash"></span>
-                    </div></li>
+                <ul class="list-none mr-8">
+                    <li v-for="dish in selectedDishes" class="mb-2 bg-white border-b hover:bg-gray-50 ">
+                        <div class="flex justify-between">
+                            <span><span class="font-bold">{{ dish.dishName }}</span> - €{{ dish.price }}</span>
+                            <font-awesome-icon class="cursor-pointer text-red-600" @click="removeDish(dish)"
+                                :icon="['fas', 'xmark']" />
+
+                        </div>
+                    </li>
                 </ul>
                 <p class="text-xl font-bold">Totaal: €{{ orderTotal.toFixed(2) }}</p>
 
-                
+
             </div>
         </div>
     </div>
