@@ -18,6 +18,7 @@
             @foreach($orderItems as $item)
                 <li>{{ $item->name }} - {{ $item->price }}</li>
             @endforeach
+            <li><strong>Total: {{ $orderTotal }}</strong></li>
         @endif
     </ul>
     <div style="page-break-before: always;">

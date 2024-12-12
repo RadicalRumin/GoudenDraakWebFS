@@ -34,6 +34,7 @@ class BillController extends Controller
 
         // Create PDF from the view and pass the URL of the QR code image
         $bill = Pdf::loadView('BillTemplate', [
+            'orderTotal'=> $orderTotal,
             'orderItems' => $orders,
             'qrCodeUrl' => $qrCodeUrl,
         ]);
