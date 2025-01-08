@@ -8,6 +8,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Badge: typeof import('primevue/badge')['default']
+    Button: typeof import('primevue/button')['default']
+    InputText: typeof import('primevue/inputtext')['default']
   }
   export interface ComponentCustomProperties {
     Ripple: typeof import('primevue/ripple')['default']

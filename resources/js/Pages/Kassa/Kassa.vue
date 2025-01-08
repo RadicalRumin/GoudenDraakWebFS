@@ -1,4 +1,5 @@
 <template>
+    <SidedishModal></SidedishModal>
     <div>
         <h1 class="text-2xl font-bold mb-4">Dishes</h1>
         <input type="text" v-model="search" @input="fetchResults" placeholder="Search dishes..."
@@ -23,7 +24,7 @@
                         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">€{{ dish.price }}</td>
                         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             <font-awesome-icon class="cursor-pointer w-4 h-4 text-green-600"
-                            :icon="['fas', 'plus']" @click="addDish(dish)"/>
+                            :icon="['fas', 'plus']" @click="chooseDish(dish)"/>
                         </td>
                     </tr>
                 </tbody>
@@ -46,12 +47,14 @@
             </div>
         </div>
     </div>
+
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Dish } from '@/Models/dish';
 import { router } from '@inertiajs/vue3';
+import SidedishModal from '@/Components/SidedishModal.vue';
 
 const search = ref(getQueryParam('query') || "");
 const props = defineProps<{ dishes: Dish[] }>()
@@ -86,6 +89,17 @@ function removeDish(dish: Dish) {
     const index = selectedDishes.value.indexOf(dish);
     selectedDishes.value.splice(index, 1);
     orderTotal.value -= Number(dish.price);
+}
+
+function chooseDish(dish: Dish) {
+    addDish(dish);
+    chooseSide();
+   
+    
+}
+
+function chooseSide() {
+    SidedishModal.open();
 }
 
 </script>
