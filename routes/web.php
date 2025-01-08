@@ -3,6 +3,7 @@
 use App\Http\Controllers\DishSearchController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\BillController;
 use Inertia\Inertia;
 
 Route::domain("restaurant." . env('APP_URL'))->group(function () {
@@ -21,6 +22,13 @@ Route::domain("admin." . env('APP_URL'))->group(function () {
     });
 });
 
+Route::domain("review." . env('APP_URL'))->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('Review/ReviewForm');
+    });
+});
+
+
 Route::get('/', function () {
     $dragonImage = asset('/images/dragon-small.avif');
 
@@ -32,3 +40,4 @@ Route::get('/', function () {
 });
 
 Route::get('/menu/pdf', [MenuController::class, 'generatePdf']);
+Route::get('/bill/pdf', [BillController::class, 'generateBill']);
