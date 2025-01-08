@@ -1,5 +1,4 @@
 <template>
-    <SidedishModal></SidedishModal>
     <div>
         <h1 class="text-2xl font-bold mb-4">Dishes</h1>
         <input type="text" v-model="search" @input="fetchResults" placeholder="Search dishes..."
@@ -48,17 +47,36 @@
         </div>
     </div>
 
+    <Dialog
+        v-model:visible="sidesVisible"
+        @show="sidesVisible = true"
+        @hide="sidesVisible = false"
+        modal
+        header="Bijgerecht"
+        :style="{ width: '25rem', background: 'white', padding: '1rem', border: '3px solid black' }"
+    >
+        <div class="m-2">
+
+            <button v-for="side in sideDishes" class="rounded-full m-1 bg-blue-500 p-2 text-white" @click="{addDish(side); sidesVisible = false;}">
+                {{ side.dishName }}
+            </button>
+            
+        </div>
+    </Dialog>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Dish } from '@/Models/dish';
 import { router } from '@inertiajs/vue3';
-import SidedishModal from '@/Components/SidedishModal.vue';
+import Dialog from "primevue/dialog";
+
+const  sidesVisible = ref(false);
 
 const search = ref(getQueryParam('query') || "");
-const props = defineProps<{ dishes: Dish[] }>()
+const props = defineProps<{ dishes: Dish[], sideDishes: Dish[] }>()
 const results = ref<Dish[]>(props.dishes);
+const sideDishes = ref<Dish[]>(props.sideDishes);
 const loading = ref(false);
 const selectedDishes = ref<Dish[]>([]);
 const orderTotal = ref(0);
@@ -92,14 +110,9 @@ function removeDish(dish: Dish) {
 }
 
 function chooseDish(dish: Dish) {
+    sidesVisible.value = true;
     addDish(dish);
-    chooseSide();
-   
-    
 }
 
-function chooseSide() {
-    SidedishModal.open();
-}
 
 </script>
