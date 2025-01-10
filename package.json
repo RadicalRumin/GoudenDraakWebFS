@@ -16,6 +16,11 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.7.1",
+        "@fortawesome/free-brands-svg-icons": "^6.7.1",
+        "@fortawesome/free-regular-svg-icons": "^6.7.1",
+        "@fortawesome/free-solid-svg-icons": "^6.7.1",
+        "@fortawesome/vue-fontawesome": "^3.0.8",
         "@inertiajs/vue3": "^1.2.0",
         "@primevue/forms": "^4.2.4",
         "@primevue/themes": "^4.1.1",
