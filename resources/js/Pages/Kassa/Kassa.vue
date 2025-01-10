@@ -58,7 +58,7 @@
         <div class="m-2">
 
             <button v-for="side in sideDishes" class="rounded-full m-1 bg-blue-500 p-2 text-white" @click="{addDish(side); sidesVisible = false;}">
-                {{ side.dishName }}
+                {{ side.dishName }} - €{{ side.price }}
             </button>
             
         </div>
