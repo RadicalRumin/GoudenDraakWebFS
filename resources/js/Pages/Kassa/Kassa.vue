@@ -41,7 +41,9 @@
                     </li>
                 </ul>
                 <p class="text-xl font-bold">Totaal: €{{ orderTotal.toFixed(2) }}</p>
-
+                <span v-if="selectedDishes.length > 0" >
+                    <button class="bg-blue-500 text-white p-2 rounded-full mt-4" @click="placeOrder()">Bestelling plaatsen</button>
+                </span>
 
             </div>
         </div>
@@ -80,6 +82,7 @@ const sideDishes = ref<Dish[]>(props.sideDishes);
 const loading = ref(false);
 const selectedDishes = ref<Dish[]>([]);
 const orderTotal = ref(0);
+const noSidesList = ['Bijgerechten'];
 
 function fetchResults() {
     loading.value = true;
@@ -110,9 +113,34 @@ function removeDish(dish: Dish) {
 }
 
 function chooseDish(dish: Dish) {
-    sidesVisible.value = true;
+    if (!(noSidesList.includes(dish.categoryName))) {
+        sidesVisible.value = true;
+    }
     addDish(dish);
 }
 
+async function placeOrder() {
+    try {
+        const url = `${window.location.origin}/bill/pdf`;
+        console.log('Request URL:', url); // Log the URL to verify it
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+            },
+            body: JSON.stringify({ orders: selectedDishes.value })
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            window.location.href = data.pdfUrl; // Redirect to the PDF URL
+        } else {
+            console.error('Failed to place order', response);
+        }
+    } catch (error) {
+        console.error('Error placing order:', error);
+    }
+}
 
 </script>

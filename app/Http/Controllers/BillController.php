@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Storage;
 
 class BillController extends Controller
 {
-    public function generateBill()
+
+
+    public function generateBill($orders = [])
     {
         // Generate the QR code in PNG format
         $qrCodeImage = QrCode::format('png')
@@ -24,13 +26,11 @@ class BillController extends Controller
         // Get the full URL for the saved PNG file
         $qrCodeUrl = storage_path('app/public/' . $qrCodePath);
 
-        //get orders from table
-        $orders = Table::find(1)->Orders;
+        
         $orderTotal = 0;
         foreach($orders as $orderItem) {
             $orderTotal += $orderItem->price;
         }
-
 
         // Create PDF from the view and pass the URL of the QR code image
         $bill = Pdf::loadView('BillTemplate', [
@@ -40,5 +40,17 @@ class BillController extends Controller
         ]);
 
         return $bill->download('bill.pdf'); // Force download
+    }
+
+    public function kassaBill(Request $request)
+    {
+        $orders = $request->input('orders', []);
+        $this->generateBill($orders);
+    }
+
+    public function generateTableBill($orderId)
+    {
+        $orders = Table::find($orderId)->Orders;
+        $this->generateBill($orders);
     }
 }

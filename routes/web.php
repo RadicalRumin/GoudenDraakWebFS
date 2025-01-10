@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\DishSearchController;
+use App\Http\Controllers\KassaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\BillController;
@@ -13,7 +13,8 @@ Route::domain("restaurant." . env('APP_URL'))->group(function () {
 });
 
 Route::domain("kassa." . env('APP_URL'))->group(function () {
-    Route::get('/', [DishSearchController::class, 'index']);
+    Route::get('/', [KassaController::class, 'index']);
+    Route::post('/bill/pdf', [BillController::class, 'kassaBill']);
 });
 
 Route::domain("admin." . env('APP_URL'))->group(function () {

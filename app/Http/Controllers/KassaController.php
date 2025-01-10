@@ -4,20 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dish;
+use App\Support\Facades\DishSearch;
 
-class DishSearchController extends Controller
+class KassaController extends Controller
 {
     public function index(Request $request)
     {
         $query = $request->input('query', '');
-        $dishes = Dish::query()
-            ->select('dishes.id', 'categories.name as category_name', 'dishes.description', 'dishes.name', 'dishes.price')
-            ->join('categories', 'dishes.category_id', '=', 'categories.id')
-            ->where('dishes.name', 'like', "%{$query}%")
-            ->orWhere('dishes.description', 'like', "%{$query}%")
-            ->orWhere('dishes.id', 'like', "%{$query}%")
-            ->orWhere('categories.name', 'like', "%{$query}%")
-            ->get();
+        $dishes = DishSearch::search($query);
 
         $sideDishes = Dish::query()
             ->select('dishes.id', 'categories.name as category_name', 'dishes.description', 'dishes.name', 'dishes.price')
@@ -52,4 +46,5 @@ class DishSearchController extends Controller
             'sideDishes' => $sideDishes,
         ]);
     }
+    
 }
