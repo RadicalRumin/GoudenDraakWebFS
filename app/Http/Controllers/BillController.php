@@ -31,6 +31,7 @@ class BillController extends Controller
         foreach($orders as $orderItem) {
             $orderTotal += $orderItem->price;
         }
+        
 
         // Create PDF from the view and pass the URL of the QR code image
         $bill = Pdf::loadView('BillTemplate', [
@@ -39,13 +40,17 @@ class BillController extends Controller
             'qrCodeUrl' => $qrCodeUrl,
         ]);
 
-        return $bill->download('bill.pdf'); // Force download
+        
+
+        return $bill->download(); // Force download
+        
     }
 
     public function kassaBill(Request $request)
     {
-        $orders = $request->input('orders', []);
-        $this->generateBill($orders);
+        $orders = $request->input('dishes', []);
+        $dishes = (array)json_decode(json: $orders);
+        $this->generateBill($dishes);
     }
 
     public function generateTableBill($orderId)

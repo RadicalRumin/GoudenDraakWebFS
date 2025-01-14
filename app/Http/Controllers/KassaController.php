@@ -24,7 +24,7 @@ class KassaController extends Controller
             return [
                 'id' => $dish->id,
                 'categoryName' => $dish->category_name,
-                'dishName' => $dish->name,
+                'name' => $dish->name,
                 'description' => $dish->description,
                 'price' => $dish->price,
             ];
@@ -35,7 +35,7 @@ class KassaController extends Controller
             return [
                 'id' => $dish->id,
                 'categoryName' => $dish->category_name,
-                'dishName' => $dish->name,
+                'name' => $dish->name,
                 'description' => $dish->description,
                 'price' => $dish->price,
             ];

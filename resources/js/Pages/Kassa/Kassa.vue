@@ -19,7 +19,7 @@
                     <tr v-for="dish in results" class="bg-white border-b hover:bg-gray-50 ">
                         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ dish.id }}</td>
                         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ dish.categoryName }}</td>
-                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ dish.dishName }}</td>
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ dish.name }}</td>
                         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">€{{ dish.price }}</td>
                         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             <font-awesome-icon class="cursor-pointer w-4 h-4 text-green-600"
@@ -33,7 +33,7 @@
                 <ul class="list-none mr-8">
                     <li v-for="dish in selectedDishes" class="mb-2 bg-white border-b hover:bg-gray-50 ">
                         <div class="flex justify-between">
-                            <span><span class="font-bold">{{ dish.dishName }}</span> - €{{ dish.price }}</span>
+                            <span><span class="font-bold">{{ dish.name }}</span> - €{{ dish.price }}</span>
                             <font-awesome-icon class="cursor-pointer text-red-600" @click="removeDish(dish)"
                                 :icon="['fas', 'xmark']" />
 
@@ -60,11 +60,15 @@
         <div class="m-2">
 
             <button v-for="side in sideDishes" class="rounded-full m-1 bg-blue-500 p-2 text-white" @click="{addDish(side); sidesVisible = false;}">
-                {{ side.dishName }} - €{{ side.price }}
+                {{ side.name }} - €{{ side.price }}
             </button>
             
         </div>
     </Dialog>
+    <form id="downloadForm" action="/bill/pdf" method="POST" style="display:none;">
+    @csrf
+        <input type="hidden" name="dishes" :value="JSON.stringify(selectedDishes)" />
+    </form>
 </template>
 
 <script setup lang="ts">
@@ -119,28 +123,10 @@ function chooseDish(dish: Dish) {
     addDish(dish);
 }
 
-async function placeOrder() {
-    try {
-        const url = `${window.location.origin}/bill/pdf`;
-        console.log('Request URL:', url); // Log the URL to verify it
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
-            },
-            body: JSON.stringify({ orders: selectedDishes.value })
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            window.location.href = data.pdfUrl; // Redirect to the PDF URL
-        } else {
-            console.error('Failed to place order', response);
-        }
-    } catch (error) {
-        console.error('Error placing order:', error);
-    }
+function placeOrder() {
+    // @ts-ignore
+    document.getElementById('downloadForm').submit();
+    
 }
 
 </script>

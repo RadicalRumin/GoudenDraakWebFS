@@ -1,7 +1,7 @@
 export interface Dish {
     id: string;
     categoryName: string;
-    dishName: string;
+    name: string;
     description: string;
     price: number;
 }
