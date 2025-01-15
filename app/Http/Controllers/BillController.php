@@ -32,6 +32,8 @@ class BillController extends Controller
             $orderTotal += $orderItem->price;
         }
         
+        $bill = app('dompdf.wrapper');
+        $bill->getDomPDF()->set_option('enable_php', true);
 
         // Create PDF from the view and pass the URL of the QR code image
         $bill = Pdf::loadView('BillTemplate', [
@@ -40,9 +42,15 @@ class BillController extends Controller
             'qrCodeUrl' => $qrCodeUrl,
         ]);
 
+        // Save the PDF to a file
+        // $billpath = 'bills/bill.pdf';
+        // Storage::disk('public')->put($billpath, $bill->output());
+        // $billUrl = Storage::temporaryUrl($billpath, now()->addMinutes(5));
+
         
 
-        return $bill->download(); // Force download
+        // Return the URL of the saved PDF file
+        return $bill->stream();
         
     }
 
