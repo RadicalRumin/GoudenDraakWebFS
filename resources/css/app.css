@@ -10,10 +10,17 @@
 
 }
 
+#app {
+    width: 100vw;
+    height: 100vh;
+    overflow: auto; /* Enable scrolling inside the div if needed */
+    display: flex; /* Flex or block depending on layout needs */
+    flex-direction: column; /* Optional, for vertical stacking */
+}
+
 html, body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* To prevent horizontal overflow */
     height: 100%;
 }
 

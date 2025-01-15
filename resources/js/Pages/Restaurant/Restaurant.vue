@@ -4,7 +4,7 @@
 </script>
 
 <template>
-    <div class="flex h-screen">
+    <div class="flex h-full">
         <Navigation></Navigation>
         <DishesList></DishesList>
     </div>
