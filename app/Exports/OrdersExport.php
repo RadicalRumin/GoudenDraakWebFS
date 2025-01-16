@@ -15,14 +15,14 @@ class OrdersExport implements FromCollection, WithHeadings
     {
         $data = Order::query()
             ->whereDate('orders.created_at', today())
-            ->join('Order_Dishes', 'orders.id', '=', 'Order_Dishes.order_id')
-            ->join('Dishes', 'Order_Dishes.dish_id', '=', 'Dishes.id')
+            ->join('order__dishes', 'orders.id', '=', 'order__dishes.order_id')
+            ->join('dishes', 'order__dishes.dish_id', '=', 'dishes.id')
             ->selectRaw('
-                Dishes.name as dish_name, 
-                SUM(Order_Dishes.quantity) as total_quantity, 
-                SUM(Order_Dishes.quantity * Dishes.price) as revenue
+                dishes.name as dish_name, 
+                SUM(order__dishes.quantity) as total_quantity, 
+                SUM(order__dishes.quantity * dishes.price) as revenue
             ')
-            ->groupBy('Dishes.id')
+            ->groupBy('dishes.id')
             ->get();
 
         // Calculate total revenue and append
