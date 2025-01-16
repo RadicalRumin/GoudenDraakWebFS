@@ -4,8 +4,31 @@
 </script>
 
 <template>
-    <div class="flex h-full">
+    <div class="grid">
         <Navigation></Navigation>
-        <DishesList></DishesList>
+
+
+
+        <DishesList class="content"></DishesList>
     </div>
+
+
 </template>
+
+<style>
+  .horizontal-bar {
+      grid-row: 1 / 2;
+      grid-column: 1 / 3;
+  }
+
+  .vertical-bar {
+      grid-row: 2 / 3;
+      grid-column: 1 / 2;
+  }
+
+  .content {
+      grid-row: 2 / 3;
+      grid-column: 2 / 3;
+  }
+
+</style>
