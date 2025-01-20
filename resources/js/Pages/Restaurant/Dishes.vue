@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import { Dish } from '@/Models/dish';
 import { ref } from 'vue';
-import { Link } from '@inertiajs/vue3';
 
 const props = defineProps<{ dishes: Dish[] }>();
 const dishes = ref<Dish[]>(props.dishes);
 </script>
+
+<script lang="ts">
+import Layout from '@/Layouts/Restaurant/Layout.vue';
+
+export default {
+    layout: [Layout,]
+}
+</script>
+
 
 <template>
     <div class="flex-1 w-full h-lvh overflow-y-auto">
@@ -20,5 +28,4 @@ const dishes = ref<Dish[]>(props.dishes);
             </div>
         </div>
     </div>
-
 </template>
