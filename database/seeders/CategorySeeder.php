@@ -32,5 +32,6 @@ class CategorySeeder extends Seeder
         Category::create(['name'=>'Vegetarische Gerechten (met witte rijst)']);
         Category::create(['name'=>'Kindermenus']);
         Category::create(['name'=>'Rijsttafels']);
+        Category::create(['name'=>'Bijgerechten']);
     }
 }

@@ -897,5 +897,48 @@ class DishSeeder extends Seeder
             'description' => '',
             'price' => 15.90
         ]);
+
+        // Bijgerechten; witte rijst, nasi goreng, bami goreng, mihoen goreng, chinese bami
+        Dish::create([
+            'id' => '103',
+            'category_id' => 20,
+            'name' => 'Witte Rijst',
+            'description' => '',
+            'price' => 1.50
+        ]);
+
+        Dish::create([
+            'id' => '104',
+            'category_id' => 20,
+            'name' => 'Nasi Goreng',
+            'description' => '',
+            'price' => 2.50
+        ]);
+
+        Dish::create([
+            'id' => '105',
+            'category_id' => 20,
+            'name' => 'Bami Goreng',
+            'description' => '',
+            'price' => 2.50
+        ]);
+
+        Dish::create([
+            'id' => '106',
+            'category_id' => 20,
+            'name' => 'Mihoen Goreng',
+            'description' => '',
+            'price' => 2.50
+        ]);
+
+        Dish::create([
+            'id' => '107',
+            'category_id' => 20,
+            'name' => 'Chinese Bami',
+            'description' => '',
+            'price' => 2.50
+        ]);
+
+
     }
 }
