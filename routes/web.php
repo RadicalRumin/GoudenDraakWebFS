@@ -1,14 +1,15 @@
 <?php
 
+use App\Http\Controllers\DishCheckoutRestaurantController;
+use App\Http\Controllers\DishOverviewRestaurantController;
 use App\Http\Controllers\DishSearchController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use Inertia\Inertia;
 
 Route::domain("restaurant." . env('APP_URL'))->group(function () {
-    Route::get('/', function () {
-        return Inertia::render('Restaurant/Restaurant');
-    });
+    Route::resource('/', DishOverviewRestaurantController::class);
+    Route::resource('/checkout', DishCheckoutRestaurantController::class);
 });
 
 Route::domain("kassa." . env('APP_URL'))->group(function () {

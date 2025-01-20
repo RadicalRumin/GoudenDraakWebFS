@@ -14,14 +14,13 @@
             </div>
         </nav>
         <nav class="vertical-bar sticky w-12 min-h-screen bg-blue-950 flex flex-col items-center py-4 space-y-6">
-            <Link href="/orders" class="text-gray-400 hover:text-white">
+            <Link href="/checkout" class="text-gray-400 hover:text-white">
             <font-awesome-icon :icon="['fa', 'cart-shopping']" />
             </Link>
             <Link href="/" class="text-gray-400 hover:text-white">
             <font-awesome-icon :icon="['fa', 'bowl-food']" />
             </Link>
         </nav>
-
-        <slot/>
+        <slot />
     </div>
 </template>

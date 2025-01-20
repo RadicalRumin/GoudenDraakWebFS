@@ -3,10 +3,9 @@ import Navigation from '@/Layouts/Restaurant/Navigation.vue';
 </script>
 
 <template>
-    <div class="grid">
-        <Navigation></Navigation>
+    <Navigation>
         <slot />
-    </div>
+    </Navigation>
 </template>
 
 
