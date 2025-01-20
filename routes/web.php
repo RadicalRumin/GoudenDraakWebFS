@@ -23,6 +23,7 @@ Route::domain("admin." . env('APP_URL'))->group(function () {
     });
     Route::get('/exports', [ExportController::class, 'index']);
     Route::get('/exports/{file}', [ExportController::class, 'download'])->name('exports.download');
+    Route::get('/planning', [PlanningController::class, 'index']);
 });
 
 Route::domain("review." . env('APP_URL'))->group(function () {
