@@ -20,7 +20,7 @@ class ScheduleController extends Controller
         $tables = Table::all();
         $schedule = Employee_Table_Plan::whereBetween('date', [$weekStartDate, $weekEndDate])->get();
 
-        return Inertia::render('Schedule', [
+        return Inertia::render('Schedule/Schedule', [
             'employees' => $employees,
             'tables' => $tables,
             'schedule' => $schedule,
