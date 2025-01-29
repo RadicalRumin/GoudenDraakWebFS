@@ -20,7 +20,7 @@
             </button>
         </div>
 
-        <!-- Tables Pool (Draggable Table List) -->
+        <!-- Tables Pool -->
         <div class="bg-white p-4 rounded-lg shadow mb-6">
             <h3 class="text-lg font-bold text-gray-700 mb-3">Available Tables</h3>
             <div class="flex gap-2 flex-wrap">
@@ -36,22 +36,22 @@
             </div>
         </div>
 
-        <!-- Week Layout (Days in Horizontal Grid) -->
+        <!-- Week Layout -->
         <div class="grid grid-cols-7 gap-4">
             <div v-for="day in daysOfWeek" :key="day" class="bg-white p-4 rounded-lg shadow">
                 <h3 class="text-lg font-bold text-blue-600 mb-2 text-center">{{ day }}</h3>
 
-                <!-- Employees & Droppable Areas -->
+                
                 <div v-for="employee in employees" :key="employee.id" class="mb-4">
                     <div class="font-medium text-gray-800 mb-2">{{ employee.first_name }} {{ employee.last_name }}</div>
                     
-                    <!-- Drop Zone for Tables -->
+                    
                     <div 
                         class="min-h-[50px] bg-gray-200 p-2 rounded-lg flex flex-wrap gap-2"
                         @dragover.prevent
                         @drop="drop($event, employee, day)"
                     >
-                        <!-- Assigned Tables -->
+                       
                         <div
                             v-for="table in getAssignedTables(employee.id, day)"
                             :key="table.id"
@@ -105,21 +105,21 @@ const loadSchedule = async () => {
     );
 };
 
-// Store dragged table info
+
 const dragStart = (event: DragEvent, table: Table) => {
     if (!event.dataTransfer) return;
     event.dataTransfer.setData("table", JSON.stringify(table));
 };
 
-// Handle table drop into employee's schedule
+
 const drop = (event: DragEvent, employee: Employee, day: string) => {
     if (!event.dataTransfer) return;
     event.preventDefault();
 
     const droppedTable = JSON.parse(event.dataTransfer.getData("table")) as Table;
 
-    // Ensure the table isn't already scheduled for this employee on the same day
-    if (!schedule.value.find(entry => entry.table_id === droppedTable.id && entry.employee_id === employee.id && entry.date === day)) {
+    // Ensure the table isn't already scheduled for this same day
+    if (!schedule.value.find(entry => entry.table_id === droppedTable.id && entry.date === day)) {
         schedule.value.push({
             employee_id: employee.id,
             table_id: droppedTable.id,
