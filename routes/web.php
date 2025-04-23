@@ -7,11 +7,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\AuthRestaurantController;
 use Inertia\Inertia;
 
 Route::domain("restaurant." . env('APP_URL'))->group(function () {
-    Route::resource('/', DishOverviewRestaurantController::class);
-    Route::resource('/checkout', DishCheckoutRestaurantController::class);
+    // Route::middleware(['auth', 'auth.session'])->group(function () {
+        Route::resource('/', DishOverviewRestaurantController::class)->names([
+            'index' => 'dish-overview.index',
+            'store' => 'dish-overview.store',
+        ]);
+        Route::resource('/checkout', DishCheckoutRestaurantController::class);
+    // });
+
+    Route::resource('/auth', AuthRestaurantController::class);
 });
 
 Route::domain("kassa." . env('APP_URL'))->group(function () {

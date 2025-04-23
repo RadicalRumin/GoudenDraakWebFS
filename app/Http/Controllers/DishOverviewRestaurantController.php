@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Dish;
 use Inertia\Inertia;
-
+use Illuminate\Http\Request;
 class DishOverviewRestaurantController extends Controller
 {
     /**
@@ -12,15 +12,29 @@ class DishOverviewRestaurantController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Restaurant/Dishes');
+        $dishes = Dish::select('id', 'name', 'description', 'price');
+
+        return Inertia::render('Restaurant/Dishes', [
+            $dishes,
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Add a new Dish to the list
      */
-    public function create()
+    public function store(Request $request)
     {
+        // Validate
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+        ]);
 
+        // Business logic
+
+
+        // Side effects
     }
 
 }
