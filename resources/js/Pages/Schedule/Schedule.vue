@@ -6,7 +6,7 @@
                 <label for="week" class="font-semibold text-gray-700">Select Week:</label>
                 <input
                     id="week"
-                    type="week"
+                    type="date"
                     v-model="selectedWeek"
                     @change="loadSchedule"
                     class="px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
@@ -80,7 +80,7 @@ const tables = ref<Table[]>([]);
 const schedule = ref<EmployeeTablePlan[]>([]);
 
 const daysOfWeek = computed(() => {
-    const startDate = new Date(selectedWeek.value);
+    const startDate = getMonday(new Date(selectedWeek.value));
     const days: string[] = [];
     for (let i = 0; i < 7; i++) {
         const day = new Date(startDate);
@@ -91,6 +91,8 @@ const daysOfWeek = computed(() => {
 });
 
 const loadSchedule = async () => {
+    
+
     router.get(
         "/schedule",
         { week: selectedWeek.value },
@@ -147,6 +149,12 @@ const saveSchedule = () => {
         }
     );
 };
+
+function getMonday(d: Date) {  
+  var day = d.getDay(),
+    diff = d.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
+  return new Date(d.setDate(diff));
+}
 
 onMounted(loadSchedule);
 </script>
