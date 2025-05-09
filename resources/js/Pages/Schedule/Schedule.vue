@@ -95,7 +95,7 @@ const loadSchedule = async () => {
 
     router.get(
         "/schedule",
-        { week: selectedWeek.value },
+        { week: getMonday(new Date(selectedWeek.value)) },
         {
             preserveState: true,
             onSuccess: (page) => {
