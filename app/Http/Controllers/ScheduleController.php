@@ -31,7 +31,13 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         $scheduleData = $request->input('schedule');
-
+        
+        // delete existing schedule for the same week
+        $weekStartDate = Carbon::parse($scheduleData[0]['date'])->startOfWeek()->toDateString();
+        $weekEndDate = Carbon::parse($scheduleData[0]['date'])->endOfWeek()->toDateString();
+        Employee_Table_Plan::whereBetween('date', [$weekStartDate, $weekEndDate])->delete();
+        
+        // create new schedule
         foreach ($scheduleData as $entry) {
             Employee_Table_Plan::create([
                 'employee_id' => $entry['employee_id'],
