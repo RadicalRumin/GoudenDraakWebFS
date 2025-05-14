@@ -7,11 +7,19 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class BillController extends Controller
 {
-    public function generateBill()
+    public function generateBill(Request $request)
     {
+        // Validate the request data
+        $request->validate([
+            'table_id' => 'required|exists:tables,id',
+        ]);
+        // Get the table ID from the request
+        $tableId = $request->input('table_id');
+
         // Generate the QR code in PNG format
         $qrCodeImage = QrCode::format('png')
             ->size(200)
@@ -25,7 +33,11 @@ class BillController extends Controller
         $qrCodeUrl = storage_path('app/public/' . $qrCodePath);
 
         //get orders from table
-        $orders = Table::find(8)->Orders;
+        $orders = Table::find($tableId)->Orders;
+        // Log the orders for debugging
+        Log::debug('Orders:', $orders->toArray());
+
+
         $orderTotal = 0;
         foreach($orders as $orderItem) {
             $orderTotal += $orderItem->price;
