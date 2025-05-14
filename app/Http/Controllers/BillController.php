@@ -25,7 +25,7 @@ class BillController extends Controller
         $qrCodeUrl = storage_path('app/public/' . $qrCodePath);
 
         //get orders from table
-        $orders = Table::find(1)->Orders;
+        $orders = Table::find(8)->Orders;
         $orderTotal = 0;
         foreach($orders as $orderItem) {
             $orderTotal += $orderItem->price;

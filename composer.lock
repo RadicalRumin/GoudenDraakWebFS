@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "288c65ee2c326f3e598ad6e8dfec76f9",
+    "content-hash": "cfb6914310b4141d02541e7ca343a540",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1531,6 +1531,41 @@
                 }
             ],
             "time": "2023-12-03T19:50:20+00:00"
+        },
+        {
+            "name": "imagick/imagick",
+            "version": "3.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Imagick/imagick.git",
+                "reference": "555bf68b592a8d9d0a0a2f37d1256a8b6cf2d39e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Imagick/imagick/zipball/555bf68b592a8d9d0a0a2f37d1256a8b6cf2d39e",
+                "reference": "555bf68b592a8d9d0a0a2f37d1256a8b6cf2d39e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 5.6.0"
+            },
+            "type": "php-ext",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "PHP-3.01"
+            ],
+            "description": "The Imagick PHP extension",
+            "support": {
+                "issues": "https://github.com/Imagick/imagick/issues",
+                "source": "https://github.com/Imagick/imagick/tree/3.8.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Danack",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-04-10T19:11:59+00:00"
         },
         {
             "name": "inertiajs/inertia-laravel",
@@ -10055,12 +10090,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
