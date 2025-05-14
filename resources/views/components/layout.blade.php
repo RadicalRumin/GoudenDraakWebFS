@@ -58,6 +58,7 @@
 		<div class="border-yellow-400 border-x-4"></div>
 		<main class="max-size-full">
 			{{ $slot }}
+		<h1> Hello World! </h1>
 		</main>
 		<div class="border-yellow-400 border-x-4"></div>
 		<div></div>
@@ -94,7 +95,7 @@
 		</div>
 
 		{{-- Top right Corner --}}
-		<div class="grid grid-rows-[auto,10px]">
+		<div class= grid grid-rows-[auto,10px]">
 			<div class="grid grid-cols-[30px,30px,30px] grid-rows-[30px,30px,30px]">
 
 				<div class="border-yellow-400"></div>

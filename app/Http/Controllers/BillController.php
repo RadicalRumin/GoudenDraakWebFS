@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Table;
+use App\Models\Order_Dish;
+use App\Models\Dish;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -34,20 +36,25 @@ class BillController extends Controller
 
         //get orders from table
         $orders = Table::find($tableId)->Orders;
-        // Log the orders for debugging
-        Log::debug('Orders:', $orders->toArray());
+        $dishes = Order_Dish::with('Dish')->whereIn('order_id', $orders->pluck('id'))->get();
+
 
 
         $orderTotal = 0;
-        foreach($orders as $orderItem) {
-            $orderTotal += $orderItem->price;
+        foreach($dishes as $orderItem) {
+            Log::info('Order Item: ', ['item' => $orderItem]);
+            // Assuming each dish has a price and quantity
+            Log::info('Dish Quantity: ', ['quantity' => $orderItem->quantity]);
+
+
+            $orderTotal += $orderItem->dish->price * $orderItem->quantity;
         }
 
 
         // Create PDF from the view and pass the URL of the QR code image
         $bill = Pdf::loadView('BillTemplate', [
             'orderTotal'=> $orderTotal,
-            'orderItems' => $orders,
+            'orderItems' => $dishes,
             'qrCodeUrl' => $qrCodeUrl,
         ]);
 

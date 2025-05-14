@@ -16,7 +16,7 @@
     <ul>
         @if(isset($orderItems))
             @foreach($orderItems as $item)
-                <li>{{ $item->name }} - {{ $item->price }}</li>
+                <li>{{ $item->quantity }}× {{ $item->dish->name }} - {{ $item->quantity*$item->dish->price}}</li>
             @endforeach
             <li><strong>Total: {{ $orderTotal }}</strong></li>
         @endif
