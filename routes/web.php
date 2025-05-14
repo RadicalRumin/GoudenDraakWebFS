@@ -46,6 +46,8 @@ Route::get('/', function () {
         ]
     );
 });
+Route::get('/menu', [MenuController::class, 'index']);
+Route::get('/menu/search', [MenuController::class, 'search']);
 
 Route::get('/menu/pdf', [MenuController::class, 'generatePdf']);
 Route::get('/bill/pdf', [BillController::class, 'generateBill']);

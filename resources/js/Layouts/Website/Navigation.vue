@@ -25,7 +25,7 @@ defineProps({
         <nav>
             <ul class="flex flex-col md:flex-row justify-center m-auto max-w-[50vw] font-medium text-white">
                 <li class="text-center bg-gradient-to-b from-cyan-300 to-blue-700">
-                    <Link href="paginas/MENUKAART.html">
+                    <Link href="/menu">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menukaart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </Link>
                 </li>

@@ -7,10 +7,10 @@ import PrimeVue from 'primevue/config';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-import { faCoffee, faUser, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCoffee, faUser, faPlus, faXmark, faStar } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
-library.add(faCoffee, faUser, faGithub, faPlus, faXmark);
+library.add(faCoffee, faUser, faGithub, faPlus, faXmark, faStar);
 
 createInertiaApp({
     resolve: name => {
