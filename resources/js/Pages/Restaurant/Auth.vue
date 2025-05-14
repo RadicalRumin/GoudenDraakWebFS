@@ -5,7 +5,8 @@ import { router } from '@inertiajs/vue3'
 
 const form = reactive({
     tableId : null,
-    customerId: null,
+    username: null,
+    password: null,
 })
 
 function submit() {
@@ -33,16 +34,13 @@ function submit() {
                             class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
                     </div>
                 </div>
-
-
                 <div>
-                    <label for="customerId" class="block text-sm/6 font-medium text-gray-900">Customer Number</label>
+                    <label for="pasword" class="block text-sm/6 font-medium text-gray-900">Password</label>
                     <div class="mt-2">
-                        <input name="customerId" id="customerId" v-model="form.customerId" required
+                        <input type="password" name="pasword" id="password" v-model="form.password" required
                             class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
                     </div>
                 </div>
-
 
                 <div>
                     <button type="submit"

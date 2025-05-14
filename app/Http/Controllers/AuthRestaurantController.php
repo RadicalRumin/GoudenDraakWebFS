@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Table;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class AuthRestaurantController extends Controller
 {
@@ -22,20 +21,18 @@ class AuthRestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate
-        $credentials = $request->validate([
-            'tableId' => 'required|string',
-        ]);
+        $envPassword = env('TABLE_PASSWORD');
+        $password = $request->input('password');
 
+        if($password === $envPassword){
+            $request->session()->regenerate();
+            $cookie = Cookie::make('restaurant_auth', true, 60, '/');
 
-
-
-        // Search if table exists and isn`t paired already
-
-        // Connect the table and set it in storage you are paired with the table
-
-
-
-        return Inertia::render('Restaurant/Auth');
+            $intended = session('intended');
+            return redirect()->to($intended)->withCookie($cookie);
+        }
+        else {
+            return back()->withErrors(['password' => 'Incorrect password']);
+        }
     }
 }

@@ -8,18 +8,24 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\AuthRestaurantController;
+use App\Http\Controllers\ResetRestaurantController;
+use App\Http\Middleware\AuthenticateForReset;
+use App\Http\Middleware\TableAuthenticated;
 use Inertia\Inertia;
 
 Route::domain("restaurant." . env('APP_URL'))->group(function () {
-    // Route::middleware(['auth', 'auth.session'])->group(function () {
+    Route::middleware(TableAuthenticated::class)->group(function () {
         Route::resource('/', DishOverviewRestaurantController::class)->names([
             'index' => 'dish-overview.index',
             'store' => 'dish-overview.store',
         ]);
         Route::resource('/checkout', DishCheckoutRestaurantController::class);
-    // });
+        Route::resource('/reset', ResetRestaurantController::class);
+    });
 
-    Route::resource('/auth', AuthRestaurantController::class);
+    Route::resource('/auth', AuthRestaurantController::class)->names([
+        'index' => 'auth.index'
+    ]);
 });
 
 Route::domain("kassa." . env('APP_URL'))->group(function () {
