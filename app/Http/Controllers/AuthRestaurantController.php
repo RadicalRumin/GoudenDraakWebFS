@@ -35,7 +35,7 @@ class AuthRestaurantController extends Controller
 
         if($password === $envPassword){
             $request->session()->regenerate();
-            $cookie = Cookie::make('restaurant_auth', $tableAuth, 60, '/');
+            $cookie = Cookie::make('restaurant_auth', $tableAuth, 60, '/', null, false, false);
 
             $intended = session('intended');
             return redirect()->to($intended)->withCookie($cookie);

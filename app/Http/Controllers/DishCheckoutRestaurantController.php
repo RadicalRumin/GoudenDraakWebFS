@@ -24,8 +24,6 @@ class DishCheckoutRestaurantController extends Controller
 
         $cookie = $request->cookie('restaurant_auth'); // e.g. "7|3"
 
-        dd($cookie);
-
         if (!$cookie) {
             return response('No cookie found')->setStatusCode(400);
         }
@@ -36,7 +34,7 @@ class DishCheckoutRestaurantController extends Controller
             return response('Invalid JSON in cookie', 400);
         }
 
-        $lastOrderDate = $data['lastOrderDate'] ?? null;
+        $lastOrderDate = Carbon::parse($data['lastOrderDate']) ?? null;
         $tableNumber = $data['tableNumber'] ?? null;
         $rounds = $data['rounds'] ?? null;
 
@@ -48,9 +46,10 @@ class DishCheckoutRestaurantController extends Controller
             return response("Round limit reached");
         }
 
-        if(Carbon::now()->lessThan($lastOrderDate)) {
+        if ($lastOrderDate->diffInMinutes(Carbon::now()) < 10) {
             return response("Time limit not reached yet");
         }
+
         $dishesInput = $request->input("data");
 
         DB::transaction(function () use ($dishesInput, $tableNumber) {
@@ -88,7 +87,7 @@ class DishCheckoutRestaurantController extends Controller
             'rounds' => $rounds,
         ])->toJson();
 
-        $cookie = Cookie::make('restaurant_auth', $tableAuth, 60, '/');
+        $cookie = Cookie::make('restaurant_auth', $tableAuth, 60, '/', null, false, false);
 
         // 3. Set new cookie in the response
         return response("Cookie updated")->withCookie($cookie);
