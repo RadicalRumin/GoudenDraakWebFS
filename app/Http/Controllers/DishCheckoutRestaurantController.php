@@ -7,59 +7,19 @@ use Inertia\Inertia;
 
 class DishCheckoutRestaurantController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return Inertia::render('Restaurant/Checkout');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create($request)
     {
+        $value = $request->session()->get('key');
 
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        // TODO Validate with if i can order the 10 minutes are done
+        // TODO Add the order to the sessions
+        // TODO Check if still have the 5 orders left
     }
 }
