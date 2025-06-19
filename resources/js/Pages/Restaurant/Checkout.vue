@@ -7,23 +7,59 @@ export default {
 </script>
 
 <template>
-    <!-- <div>
-        <h1 class="text-2xl font-bold mb-4">Bestelling</h1>
-        <ul class="list-none mr-8">
-            <li v-for="dish in selectedDishes" class="mb-2 bg-white border-b hover:bg-gray-50 ">
-                <div class="flex justify-between">
-                    <span><span class="font-bold">{{ dish.dishName }}</span> - €{{ dish.price }}</span>
-                    <font-awesome-icon class="cursor-pointer text-red-600" @click="removeDish(dish)"
-                        :icon="['fas', 'xmark']" />
+    <div class="w-full grid grid-cols-[2fr,1fr] gap-4">
 
-                </div>
-            </li>
-        </ul>
-        <p class="text-xl font-bold">Totaal: €{{ orderTotal.toFixed(2) }}</p>
-    </div> -->
+        <div v-if="dishes.length > 0">
+            <table class="table-auto w-full text-sm text-left rtl:text-right text-gray-500">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">Nummer</th>
+                        <th scope="col" class="px-6 py-3">Categorie</th>
+                        <th scope="col" class="px-6 py-3">Gerecht</th>
+                        <th scope="col" class="px-6 py-3"></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr v-for="dish in dishes" class="bg-white border-b hover:bg-gray-50 ">
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ dish.id }}</td>
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ dish.categoryName }}</td>
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ dish.dishName }}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <button v-on:click="sendOrder">
+                Send orders
+            </button>
+
+        </div>
+
+        <div v-else>
+            Nothing is the cart
+        </div>
+
+    </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
+    import { getDishes, clearDishes } from "../../Services/store"
+    import { router } from '@inertiajs/vue3'
+    import { toRaw } from "vue"
+
+    const dishes = getDishes();
 
 
+
+    function sendOrder() {
+        const send = toRaw(dishes)
+        router.post("/checkout",)
+
+        router.post("/checkout", {
+            method: 'post',
+            data: dishes,
+        })
+        clearDishes();
+    };
 </script>

@@ -16,7 +16,8 @@
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ dish.dishName }}</td>
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                         <font-awesome-icon class="cursor-pointer w-4 h-4 text-green-600" :icon="['fas', 'plus']"
-                            @click="chooseDish(dish)" />
+                            @click
+                            ="chooseDish(dish)" />
                     </td>
                 </tr>
             </tbody>
@@ -40,26 +41,18 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Dish } from '@/Models/dish';
+import { addDishes, orderTotal } from '@/Services/store';
 import Dialog from "primevue/dialog";
 
 const sidesVisible = ref(false);
 
-const search = ref(getQueryParam('query') || "");
 const props = defineProps<{ dishes: Dish[], sideDishes: Dish[] }>()
 const results = ref<Dish[]>(props.dishes);
 const sideDishes = ref<Dish[]>(props.sideDishes);
-const loading = ref(false);
-const selectedDishes = ref<Dish[]>([]);
-const orderTotal = ref(0);
 
-
-function getQueryParam(param: string) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
-}
 
 function addDish(dish: Dish) {
-    selectedDishes.value.push(dish);
+    addDishes(dish)
     orderTotal.value += Number(dish.price);
 }
 
@@ -71,6 +64,7 @@ function chooseDish(dish: Dish) {
 
 <script lang="ts">
 import Layout from '@/Layouts/Restaurant/Layout.vue';
+
 
 export default {
     layout: [Layout]

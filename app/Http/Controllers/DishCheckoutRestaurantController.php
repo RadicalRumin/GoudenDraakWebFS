@@ -12,8 +12,10 @@ class DishCheckoutRestaurantController extends Controller
         return Inertia::render('Restaurant/Checkout');
     }
 
-    public function create($request)
+    public function store(Request $request)
     {
+        return to_route('dish-overview.index')->with('success', 'Dishes created');
+
         $value = $request->session()->get('key');
 
 
