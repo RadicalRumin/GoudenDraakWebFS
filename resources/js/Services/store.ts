@@ -31,3 +31,7 @@ export function getOrderHistory() {
     const orderHistory = localStorage.getItem('orderHistory');
     return orderHistory ? JSON.parse(orderHistory) : [];
 }
+
+export function clearOrderHistory() {
+    localStorage.removeItem('orderHistory');
+}
