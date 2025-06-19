@@ -58,7 +58,7 @@ export default {
 
         router.post("/checkout", {
             method: 'post',
-            data: dishes,
+            data: send,
         })
         clearDishes();
     };
