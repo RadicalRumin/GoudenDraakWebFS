@@ -2,7 +2,7 @@ import { ref, onMounted } from 'vue';
 
 const tableData = ref(null);
 
-function getCookie(name: string) {
+export function getCookie(name: string) {
     const cookies = document.cookie.split('; ').reduce((acc: Record<string, string>, cookieStr) => {
         const [key, val] = cookieStr.split('=');
         acc[key] = val;

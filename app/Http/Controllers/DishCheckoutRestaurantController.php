@@ -35,6 +35,7 @@ class DishCheckoutRestaurantController extends Controller
         }
 
         $lastOrderDate = Carbon::parse($data['lastOrderDate']) ?? null;
+        $initialOrderDate = Carbon::parse($data['initialOrderDate']) ?? null;
         $tableNumber = $data['tableNumber'] ?? null;
         $rounds = $data['rounds'] ?? null;
 
@@ -81,18 +82,18 @@ class DishCheckoutRestaurantController extends Controller
 
         $rounds = $rounds -1;
 
-        if ($rounds == 0) {
-            $response = redirect('/bill/pdf');
-            return $response->withCookie(Cookie::forget('restaurant_auth'));
-        }
-
         $tableAuth = collect([
             'lastOrderDate' => Carbon::now()->toIso8601String(),
+            'initialOrderDate' => $initialOrderDate,
             'tableNumber' => $tableNumber,
             'rounds' => $rounds,
         ]);
 
         $cookie = Cookie::make('restaurant_auth', $tableAuth, 60, '/', null, false, false);
+
+        if ($rounds == 0) {
+            return redirect()->route('bill.show')->withCookie($cookie);
+        }
 
         // 3. Set new cookie in the response
         return response("Cookie updated")->withCookie($cookie);

@@ -45,10 +45,10 @@ export default {
 </template>
 
 <script lang="ts" setup>
-    import { getDishes, clearDishes, addOrderHistory } from "../../Services/store"
+    import { getDishes, clearDishes, addOrderHistory, getOrderHistory } from "../../Services/store"
     import { router } from '@inertiajs/vue3'
     import { toRaw } from "vue"
-
+    import { getCookie } from "@/Composables/useRestaurantCookie";
     const dishes = getDishes();
 
     function sendOrder() {

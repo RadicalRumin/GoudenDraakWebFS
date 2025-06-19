@@ -60,5 +60,5 @@ Route::get('/', function () {
 });
 
 Route::get('/menu/pdf', [MenuController::class, 'generatePdf']);
-Route::get('/bill/pdf', [BillController::class, 'showBill']);
+Route::get('/bill', [BillController::class, 'showBill'])->name('bill.show');
 Route::get('/bill/download', [BillController::class, 'downloadBill'])->name('bill.download');
