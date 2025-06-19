@@ -43,7 +43,7 @@ class DishCheckoutRestaurantController extends Controller
         }
 
         if($rounds < 1){
-            return response("Round limit reached");
+            return response("Round limit reached")->withCookie(Cookie::forget('restaurant_auth'));
         }
 
         if ($lastOrderDate->diffInMinutes(Carbon::now()) < 10) {
@@ -80,6 +80,11 @@ class DishCheckoutRestaurantController extends Controller
         });
 
         $rounds = $rounds -1;
+
+        if ($rounds == 0) {
+            $response = redirect('/bill/pdf');
+            return $response->withCookie(Cookie::forget('restaurant_auth'));
+        }
 
         $tableAuth = collect([
             'lastOrderDate' => Carbon::now()->toIso8601String(),

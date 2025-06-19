@@ -1,5 +1,6 @@
 <script lang="ts">
 import Layout from '@/Layouts/Restaurant/Layout.vue';
+import { refreshCookie } from "@/Composables/useRestaurantCookie";
 
 export default {
     layout: [Layout,]
@@ -44,7 +45,7 @@ export default {
 </template>
 
 <script lang="ts" setup>
-    import { getDishes, clearDishes } from "../../Services/store"
+    import { getDishes, clearDishes, addOrderHistory } from "../../Services/store"
     import { router } from '@inertiajs/vue3'
     import { toRaw } from "vue"
 
@@ -56,7 +57,8 @@ export default {
             method: 'post',
             data: send,
         })
+        addOrderHistory();
         clearDishes();
-        window.dispatchEvent(new Event('refresh-cookie'));
+        refreshCookie();
     };
 </script>

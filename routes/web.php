@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\RestaurantOrderHistoryController;
 use App\Http\Controllers\AuthRestaurantController;
 use App\Http\Controllers\ResetRestaurantController;
 use App\Http\Middleware\AuthenticateForReset;
@@ -21,7 +22,7 @@ Route::domain("restaurant." . env('APP_URL'))->group(function () {
         ]);
         Route::resource('/checkout', DishCheckoutRestaurantController::class);
         Route::resource('/reset', ResetRestaurantController::class);
-        // Route::resource('/orderHistory', )
+        Route::resource('/orderhistory', RestaurantOrderHistoryController::class);
     });
 
     Route::resource('/auth', AuthRestaurantController::class)->names([

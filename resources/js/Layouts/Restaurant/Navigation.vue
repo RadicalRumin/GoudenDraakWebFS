@@ -19,6 +19,9 @@ const { tableData } = useRestaurantCookie();
             <Link href="/checkout" class="text-gray-400 hover:text-white">
             <font-awesome-icon :icon="['fa', 'cart-shopping']" />
             </Link>
+            <Link href="/orderhistory" class="text-gray-400 hover:text-white">
+            <font-awesome-icon :icon="['fa', 'bowl-food']" />
+            </Link>
             <Link href="/" class="text-gray-400 hover:text-white">
             <font-awesome-icon :icon="['fa', 'bowl-food']" />
             </Link>

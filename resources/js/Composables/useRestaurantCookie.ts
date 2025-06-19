@@ -1,4 +1,4 @@
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const tableData = ref(null);
 
@@ -20,7 +20,7 @@ function getCookie(name: string) {
     }
 }
 
-function refreshCookie() {
+export function refreshCookie() {
     tableData.value = getCookie('restaurant_auth');
 }
 
@@ -31,11 +31,7 @@ export function useRestaurantCookie() {
     if (!isSetup) {
         onMounted(() => {
             refreshCookie();
-            window.addEventListener('refresh-cookie', refreshCookie);
-        });
 
-        onUnmounted(() => {
-            window.removeEventListener('refresh-cookie', refreshCookie);
         });
 
         isSetup = true;

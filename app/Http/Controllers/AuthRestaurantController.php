@@ -30,7 +30,7 @@ class AuthRestaurantController extends Controller
         $tableData = [
             'tableNumber' => $tableNumber,
             'lastOrderDate' => Carbon::parse(0)->toIso8601String(),
-            'rounds' => 5,
+            'rounds' => 1,
         ];
 
         if ($password === $envPassword) {

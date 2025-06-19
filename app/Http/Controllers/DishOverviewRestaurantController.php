@@ -54,22 +54,4 @@ class DishOverviewRestaurantController extends Controller
         ]);
     }
 
-    /**
-     * Add a new Dish to the list
-     */
-    public function store(Request $request)
-    {
-        // Validate
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric',
-        ]);
-
-        // Business logic
-
-
-        // Side effects
-    }
-
 }
