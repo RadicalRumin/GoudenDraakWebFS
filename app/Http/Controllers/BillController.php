@@ -7,38 +7,49 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class BillController extends Controller
 {
-    public function generateBill()
+    public function showBill()
     {
-        // Generate the QR code in PNG format
-        $qrCodeImage = QrCode::format('png')
+        // Generate QR code as base64
+        $qrCodePng = QrCode::format('png')
             ->size(200)
             ->generate('https://review.' . parse_url(config('app.url'), PHP_URL_HOST));
 
-        // Save the QR code image to a temporary location as PNG
-        $qrCodePath = 'qrcodes/review_qr_code.png';
-        Storage::disk('public')->put($qrCodePath, $qrCodeImage);
+        $qrCodeBase64 = 'data:image/png;base64,' . base64_encode($qrCodePng);
 
-        // Get the full URL for the saved PNG file
-        $qrCodeUrl = storage_path('app/public/' . $qrCodePath);
+        // Get orders
+        $orders = Table::find(1)->orders;
+        $orderTotal = collect($orders)->sum('price');
 
-        //get orders from table
-        $orders = Table::find(1)->Orders;
-        $orderTotal = 0;
-        foreach($orders as $orderItem) {
-            $orderTotal += $orderItem->price;
-        }
-
-
-        // Create PDF from the view and pass the URL of the QR code image
-        $bill = Pdf::loadView('BillTemplate', [
-            'orderTotal'=> $orderTotal,
+        // Render Inertia page
+        return Inertia::render('Restaurant/BillPage', [
+            'orderTotal' => $orderTotal,
             'orderItems' => $orders,
-            'qrCodeUrl' => $qrCodeUrl,
+            'qrCodeBase64' => $qrCodeBase64,
+        ]);
+    }
+
+    public function downloadBill()
+    {
+        $qrCodePng = QrCode::format('png')
+            ->size(200)
+            ->generate('https://review.' . parse_url(config('app.url'), PHP_URL_HOST));
+
+        $qrCodePath = tempnam(sys_get_temp_dir(), 'qr_') . '.png';
+        file_put_contents($qrCodePath, $qrCodePng);
+
+        $orders = Table::find(1)->orders;
+        $orderTotal = collect($orders)->sum('price');
+
+        $bill = Pdf::loadView('BillTemplate', [
+            'orderTotal' => $orderTotal,
+            'orderItems' => $orders,
+            'qrCodeUrl' => $qrCodePath,
         ]);
 
-        return $bill->download('bill.pdf'); // Force download
+        return $bill->download('bill.pdf');
     }
 }
