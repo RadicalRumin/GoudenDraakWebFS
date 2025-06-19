@@ -5,7 +5,6 @@ import { router } from '@inertiajs/vue3'
 
 const form = reactive({
     tableId : null,
-    username: null,
     password: null,
 })
 

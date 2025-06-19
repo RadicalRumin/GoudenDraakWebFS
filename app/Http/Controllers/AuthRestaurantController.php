@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Cookie;
+use Carbon\Carbon;
 
 class AuthRestaurantController extends Controller
 {
@@ -24,9 +25,17 @@ class AuthRestaurantController extends Controller
         $envPassword = env('TABLE_PASSWORD');
         $password = $request->input('password');
 
+        $tableNumber = $request->input("tableId");
+
+        $tableAuth = collect([
+            'tableNumber' => $tableNumber,
+            'lastOrderDate' => Carbon::parse(0),
+            'rounds' => 5,
+        ])->toJson();
+
         if($password === $envPassword){
             $request->session()->regenerate();
-            $cookie = Cookie::make('restaurant_auth', true, 60, '/');
+            $cookie = Cookie::make('restaurant_auth', $tableAuth, 60, '/');
 
             $intended = session('intended');
             return redirect()->to($intended)->withCookie($cookie);

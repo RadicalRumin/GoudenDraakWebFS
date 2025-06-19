@@ -50,12 +50,8 @@ export default {
 
     const dishes = getDishes();
 
-
-
     function sendOrder() {
         const send = toRaw(dishes)
-        router.post("/checkout",)
-
         router.post("/checkout", {
             method: 'post',
             data: send,
