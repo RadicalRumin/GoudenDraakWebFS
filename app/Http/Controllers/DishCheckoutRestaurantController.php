@@ -82,10 +82,10 @@ class DishCheckoutRestaurantController extends Controller
         $rounds = $rounds -1;
 
         $tableAuth = collect([
-            'lastOrderDate' => Carbon::now(),
+            'lastOrderDate' => Carbon::now()->toIso8601String(),
             'tableNumber' => $tableNumber,
             'rounds' => $rounds,
-        ])->toJson();
+        ]);
 
         $cookie = Cookie::make('restaurant_auth', $tableAuth, 60, '/', null, false, false);
 

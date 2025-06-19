@@ -24,23 +24,26 @@ class AuthRestaurantController extends Controller
     {
         $envPassword = env('TABLE_PASSWORD');
         $password = $request->input('password');
-
         $tableNumber = $request->input("tableId");
 
-        $tableAuth = collect([
+        // Create as array instead of collection
+        $tableData = [
             'tableNumber' => $tableNumber,
-            'lastOrderDate' => Carbon::parse(0),
+            'lastOrderDate' => Carbon::parse(0)->toIso8601String(),
             'rounds' => 5,
-        ])->toJson();
+        ];
 
-        if($password === $envPassword){
+        if ($password === $envPassword) {
             $request->session()->regenerate();
-            $cookie = Cookie::make('restaurant_auth', $tableAuth, 60, '/', null, false, false);
+
+            // Explicitly convert to JSON string
+            $jsonValue = json_encode($tableData);
+
+            $cookie = Cookie::make('restaurant_auth', $jsonValue, 60, '/', null, false, false);
 
             $intended = session('intended');
             return redirect()->to($intended)->withCookie($cookie);
-        }
-        else {
+        } else {
             return back()->withErrors(['password' => 'Incorrect password']);
         }
     }

@@ -57,5 +57,6 @@ export default {
             data: send,
         })
         clearDishes();
+        window.dispatchEvent(new Event('refresh-cookie'));
     };
 </script>
