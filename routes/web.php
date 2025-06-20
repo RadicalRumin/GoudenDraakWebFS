@@ -13,6 +13,7 @@ use App\Http\Controllers\ResetRestaurantController;
 use App\Http\Middleware\AuthenticateForReset;
 use App\Http\Middleware\TableAuthenticated;
 use Inertia\Inertia;
+use App\Http\Controllers\ForgetRestaurantAuthCookieController;
 
 Route::domain("restaurant." . env('APP_URL'))->group(function () {
     Route::middleware(TableAuthenticated::class)->group(function () {
@@ -60,5 +61,8 @@ Route::get('/', function () {
 });
 
 Route::get('/menu/pdf', [MenuController::class, 'generatePdf']);
+Route::get('/bill/show/{tableArray?}', [BillController::class, 'showBill'])->name('bill.show');
 Route::get('/bill', [BillController::class, 'showBill'])->name('bill.show');
 Route::get('/bill/download', [BillController::class, 'downloadBill'])->name('bill.download');
+
+Route::get('/forget-restaurant-auth', ForgetRestaurantAuthCookieController::class);

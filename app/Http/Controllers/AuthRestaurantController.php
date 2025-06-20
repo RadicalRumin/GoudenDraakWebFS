@@ -29,8 +29,8 @@ class AuthRestaurantController extends Controller
         // Create as array instead of collection
         $tableData = [
             'tableNumber' => $tableNumber,
-            'initialOrderDate' => Carbon::parse(0)->toIso8601String(),
-            'lastOrderDate' => Carbon::parse(0)->toIso8601String(),
+            'initialOrderDate' => Carbon::now()->subMinutes(10)->toIso8601String(),
+            'lastOrderDate' => Carbon::now()->subMinutes(10)->toIso8601String(),
             'rounds' => 1,
         ];
 

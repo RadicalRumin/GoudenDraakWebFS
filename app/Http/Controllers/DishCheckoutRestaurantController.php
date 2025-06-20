@@ -10,6 +10,7 @@ use App\Models\Order_Dish;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class DishCheckoutRestaurantController extends Controller
 {
@@ -20,8 +21,6 @@ class DishCheckoutRestaurantController extends Controller
 
     public function store(Request $request)
     {
-
-
         $cookie = $request->cookie('restaurant_auth'); // e.g. "7|3"
 
         if (!$cookie) {
@@ -89,13 +88,44 @@ class DishCheckoutRestaurantController extends Controller
             'rounds' => $rounds,
         ]);
 
+        $initialOrderDate = $data['initialOrderDate'];
+        $lastOrderDate = Carbon::now()->toIso8601String();
+
         $cookie = Cookie::make('restaurant_auth', $tableAuth, 60, '/', null, false, false);
 
         if ($rounds == 0) {
-            return redirect()->route('bill.show')->withCookie($cookie);
+            // Generate QR code as base64
+            $qrCodePng = QrCode::format('png')
+                ->size(200)
+                ->generate('https://review.' . parse_url(config('app.url'), PHP_URL_HOST));
+
+            $qrCodeBase64 = 'data:image/png;base64,' . base64_encode($qrCodePng);
+
+            $query = Order_Dish::query();
+
+            if ($initialOrderDate && $lastOrderDate) {
+                $query->whereBetween('created_at', [$initialOrderDate, $lastOrderDate]);
+            }
+
+            $orderDishes = $query->get();
+
+            $ids = [];
+            foreach ($orderDishes as $orderDish) {
+                array_push($ids, $orderDish->id);
+            }
+
+            $dishIds = $orderDishes->pluck('dish_id')->unique();
+            $dishPrices = Dish::whereIn('id', $dishIds)->pluck('price', 'id');
+            $orderTotal = $orderDishes->sum(function ($orderDish) use ($dishPrices) {
+                return $dishPrices[$orderDish->dish_id] ?? 0;
+            });
+
+            return Inertia::render('Restaurant/BillPage', [
+                'orderTotal' => $orderTotal,
+                'qrCodeBase64' => $qrCodeBase64,
+            ]);
         }
 
-        // 3. Set new cookie in the response
         return response("Cookie updated")->withCookie($cookie);
     }
 }

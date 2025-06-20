@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Dish;
 use App\Models\Order;
 use App\Models\Order_Dish;
 use App\Models\Table;
@@ -14,10 +15,18 @@ use Illuminate\Support\Facades\Cookie;
 
 class BillController extends Controller
 {
-    public function showBill($request)
+    public function showBill($request, $tableArray)
     {
-        $cookie = $request->cookie('restaurant_auth');
-        dd($cookie);
+        dd($tableArray);
+
+
+        $tableData = [];
+
+        if ($tableArray) {
+            $tableData = json_decode(base64_decode($tableArray), true);
+        }
+
+        // $cookie = $request->cookie('restaurant_auth');
         if (!$cookie) {
             return response('No cookie found')->setStatusCode(400);
         }
@@ -41,15 +50,24 @@ class BillController extends Controller
         $query = Order_Dish::query();
 
         if ($initialOrderDate && $lastOrderDate) {
-            $query->whereBetween('created_at', [$initialOrderDate->startOfDay(), $lastOrderDate->endOfDay()]);
+            $query->whereBetween('created_at', [$initialOrderDate, $lastOrderDate]);
         } elseif ($initialOrderDate) {
-            $query->where('created_at', '>=', $initialOrderDate->startOfDay());
+            $query->where('created_at', '>=', $initialOrderDate);
         } elseif ($lastOrderDate) {
-            $query->where('created_at', '<=', $lastOrderDate->endOfDay());
+            $query->where('created_at', '<=', $lastOrderDate);
         }
 
         $orderDishes = $query->get();
-        $orderTotal = collect($orderDishes)->sum('price');
+        $ids = [];
+        foreach($orderDishes as $orderDish) {
+            array_push($ids, $orderDish->id);
+        }
+
+        $dishIds = $orderDishes->pluck('dish_id')->unique();
+        $dishPrices = Dish::whereIn('id', $dishIds)->pluck('price', 'id');
+        $orderTotal = $orderDishes->sum(function ($orderDish) use ($dishPrices) {
+            return $dishPrices[$orderDish->dish_id] ?? 0;
+        });
 
         // Render Inertia page
         return Inertia::render('Restaurant/BillPage', [
