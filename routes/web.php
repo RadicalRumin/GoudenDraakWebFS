@@ -12,6 +12,7 @@ use App\Http\Controllers\AuthRestaurantController;
 use App\Http\Controllers\ResetRestaurantController;
 use App\Http\Middleware\AuthenticateForReset;
 use App\Http\Middleware\TableAuthenticated;
+use App\Http\Controllers\ScheduleController;
 use Inertia\Inertia;
 use App\Http\Controllers\ForgetRestaurantAuthCookieController;
 
@@ -41,6 +42,9 @@ Route::domain("admin." . env('APP_URL'))->group(function () {
     });
     Route::get('/exports', [ExportController::class, 'index']);
     Route::get('/exports/{file}', [ExportController::class, 'download'])->name('exports.download');
+    Route::get('/schedule', [ScheduleController::class, 'index'])->name('schedule.index');
+    Route::post('/schedule', [ScheduleController::class, 'store'])->name('schedule.store');
+    Route::put('/schedule/{week}', [ScheduleController::class, 'update'])->name('schedule.update');
 });
 
 Route::domain("review." . env('APP_URL'))->group(function () {
@@ -53,12 +57,15 @@ Route::domain("review." . env('APP_URL'))->group(function () {
 Route::get('/', function () {
     $dragonImage = asset('/images/dragon-small.avif');
 
-    return Inertia::render('Website/Index',
+    return Inertia::render(
+        'Website/Index',
         [
             'dragonImage' => $dragonImage
         ]
     );
 });
+Route::get('/menu', [MenuController::class, 'index']);
+Route::get('/menu/search', [MenuController::class, 'search']);
 
 Route::get('/menu/pdf', [MenuController::class, 'generatePdf']);
 Route::get('/bill/show/{tableArray?}', [BillController::class, 'showBill'])->name('bill.show');
@@ -66,3 +73,5 @@ Route::get('/bill', [BillController::class, 'showBill'])->name('bill.show');
 Route::get('/bill/download', [BillController::class, 'downloadBill'])->name('bill.download');
 
 Route::get('/forget-restaurant-auth', ForgetRestaurantAuthCookieController::class);
+Route::get('/bill/pdf', [BillController::class, 'generateBill']);
+

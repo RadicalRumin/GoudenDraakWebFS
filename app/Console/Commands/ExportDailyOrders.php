@@ -10,7 +10,7 @@ use Illuminate\Contracts\Console\Isolatable;
 class ExportDailyOrders extends Command implements Isolatable
 {
 
-    protected $signature = 'app:export-daily-orders';
+    protected $signature = 'orders:export-daily';
     protected $description = 'Command description';
 
 
